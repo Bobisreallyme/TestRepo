@@ -50,8 +50,20 @@ The trained LLM is utilized to generate representations of each individual viewe
 
 ## Data Collection
 
-Livestream chat data is collected by making use of the 
+Livestream URLs and associated metadata (titles, dates) are collected from YouTube channels using the following approach:
 
+- **Channel Information Retrieval:** Channel URLs and corresponding spreadsheet names are read from an ODS file.
+- **Scraping Livestream URLs:** Selenium WebDriver is used to scroll through each channel's page, loading and extracting all livestream URLs. In this particular case, because we are using google colab, I use google_colab_selenium (Jacob Padilla, https://github.com/jpjacobpadilla/Google-Colab-Selenium/tree/main) to run Selenium in colab
+- **Fetching Metadata with YouTube API:** Each livestream URL is queried using the YouTube Data API to retrieve metadata such as video title and upload date.
+- **Organizing and Saving Data:** Retrieved metadata (titles, URLs, dates) are sorted chronologically and saved in an ODS file for further analysis.
+
+After extracting urls and metadata, livestream chat data associated with each URL is extracted and stored for analysis:
+- **Fetching Chat Messages:** Using the extracted livestream URLs, each chat messages are retrieved along with other metadata (including the sender name, the time, their membership status, the type of message, and the quantity and currency of money sent if the message is part of a donation). This is done using the chat_downloader library (Joshua Lochner, https://github.com/xenova/chat-downloader)
+- **Storing in Database:** Chat messages, along with metadata (message type, author details, timestamps, donation details), are stored in an SQLite database (Db_file.dbs).
+
+Both url/metadata extraction and chat data extraction code can be found in 
+
+If the database has already been created, 
 
 ## LLM Pre-training
 
