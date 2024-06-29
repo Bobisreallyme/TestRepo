@@ -3,6 +3,9 @@
 ## Table of Contents
 - [Introduction](#introduction)
 - [Project Structure](#project-structure)
+- [Data Collection](#project-structure)
+- [LLM Pre-training](#project-structure)
+- [Behavioral Prediction](#project-structure)
 - [Results](#Results)
 - [Data](#data)
 - 
