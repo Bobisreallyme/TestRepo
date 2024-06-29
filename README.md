@@ -47,7 +47,15 @@ Below is a graphical outline illustrating each step of the process.
 
 
 ## Project Structure
-
+- /docs
+  - README.md
+  - /images
+    - logo.png
+- /src
+  - main.py
+  - /utils
+    - helper.py
+- LICENSE
 
 ## Results
 
