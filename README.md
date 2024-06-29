@@ -40,6 +40,8 @@ Code for this section can be found in
 
 Below is a graphical outline illustrating each step of the process.
 
+![Graphical Outline](Images/Projectoutline.tif)
+
 
 
 
