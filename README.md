@@ -12,7 +12,7 @@
 
 ## Introduction
 
-This project demonstrates how to implement behavioral prediction from language data through the implementation of a transformed neural network on embeddings generated from a BERT based large language model (LLM) to predict whether a livestream viewer will or will not donate. These models are implemeneted using a combination of pytorch (for the prediction network) and Huggingface's open source models for our LLM. All experiments are constructed in collab notebooks.
+This project demonstrates how to implement behavioral prediction from language data through the implementation of a transformed neural network on embeddings generated from a BERT based large language model (LLM) to predict whether a livestream viewer will or will not donate. These models are implemented using a combination of pytorch (for the prediction network) and Huggingface's open source models for our LLM. All experiments are constructed in collab notebooks.
 
 This project is broken into 3 parts:
 
@@ -23,7 +23,6 @@ Livestream data for a particular streamer is scrapped from youtube in two steps.
 **2. LLM Pre-training**
 
 A fraction of the data is used to pre-train a BERT based LLM. A sampled set of streams is used to perform pre-training. Messages are concatenated together before training. Training effectiveness is tested by assessing perplexity over training and by looking at the decay of cosine distance between messages as a function of time.
-
 
 **3. Behavioral Prediction**
 
