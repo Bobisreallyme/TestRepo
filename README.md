@@ -53,7 +53,7 @@ The trained LLM is utilized to generate representations of each individual viewe
 Livestream URLs and associated metadata (titles, dates) are collected from YouTube channels using the following approach:
 
 - **Channel Information Retrieval:** Channel URLs and corresponding spreadsheet names are read from an ODS file.
-- **Scraping Livestream URLs:** Selenium WebDriver is used to scroll through each channel's page, loading and extracting all livestream URLs. In this particular case, because we are using google colab, I use google_colab_selenium (Jacob Padilla, https://github.com/jpjacobpadilla/Google-Colab-Selenium/tree/main) to run Selenium in colab
+- **Scraping Livestream URLs:** Selenium WebDriver is used to scroll through each channel's page, loading and extracting all livestream URLs. In this particular case, because we are using google colab, we use google_colab_selenium (Jacob Padilla, https://github.com/jpjacobpadilla/Google-Colab-Selenium/tree/main) to run Selenium in colab
 - **Fetching Metadata with YouTube API:** Each livestream URL is queried using the YouTube Data API to retrieve metadata such as video title and upload date.
 - **Organizing and Saving Data:** Retrieved metadata (titles, URLs, dates) are sorted chronologically and saved in an ODS file for further analysis.
 
@@ -69,11 +69,27 @@ If the database has already been created, and must instead be updated with new s
 
 ## LLM Pre-training
 
+Using the data collected above, we train and evaluate a language model using Hugging Face's Transformers library. The workflow involves data extraction, preprocessing, tokenization, training, and evaluation.
+
+- **Data Extraction:** The script reads a list of stream URLs and names from an Excel file and selects a subset of these streams.It then connects to a SQLite database and extracts messages, timestamps, and author names for each stream. Streams without any messages are filtered out.
+  
+- **Data Sorting:** Messages, timestamps, and author names are sorted by the timestamp to maintain chronological order.
+
+- **Data Preprocessing and Tokenization:** Messages are tokenized using a pre-trained tokenizer from Hugging Face. The tokenized data is then grouped into chunks of a specified size to prepare it for training.
+
+- **Dataset Preparation:** The script creates and concatenates tokenized datasets. A small subset of the data is removed in order to create a second evalution dataset for non-concatenated data. The remaining data is then split into training and test sets. Additionally, it prepares evaluation datasets by inserting random masks into the data, which helps in calculating the perplexity during evaluation.
+
+- **Model Training and Evaluation:** Data loaders, optimizer, and learning rate scheduler are set up. The model is trained using an accelerator for efficient computation.The model's performance is evaluated by calculating the perplexity on both concatenated and original datasets. The script saves the model at specified checkpoints during training.
 
 ## Behavioral Prediction
 
 
 ## Results
+### LLM Pre-training
 
-When 
+The sucess of masked training for our BERT model can be tested by evaluating the loss by looking at the perplexity
+
+To further test to see if pre-training finds 
+
+### Behavioral Prediction
 
