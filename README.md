@@ -71,25 +71,27 @@ If the database has already been created, and must instead be updated with new s
 
 Using the data collected above, we train and evaluate a language model using Hugging Face's Transformers library. The workflow involves data extraction, preprocessing, tokenization, training, and evaluation.
 
-- **Data Extraction:** The script reads a list of stream URLs and names from an Excel file and selects a subset of these streams.It then connects to a SQLite database and extracts messages, timestamps, and author names for each stream. Streams without any messages are filtered out.
+- **Data Extraction:** We read a list of stream URLs and names from an Excel file and select a subset of these streams. We then connects to a SQLite database and extracts messages, timestamps, and author names for each stream. Streams without any messages are filtered out.
   
 - **Data Sorting:** Messages, timestamps, and author names are sorted by the timestamp to maintain chronological order.
 
 - **Data Preprocessing and Tokenization:** Messages are tokenized using a pre-trained tokenizer from Hugging Face. The tokenized data is then grouped into chunks of a specified size to prepare it for training.
 
-- **Dataset Preparation:** The script creates and concatenates tokenized datasets. A small subset of the data is removed in order to create a second evalution dataset for non-concatenated data. The remaining data is then split into training and test sets. Additionally, it prepares evaluation datasets by inserting random masks into the data, which helps in calculating the perplexity during evaluation.
+- **Dataset Preparation:** We create and concatenate tokenized datasets. A small subset of the data is removed in order to create a second evalution dataset for non-concatenated data. The remaining data is then split into training and test sets. Evaluation datasets are prepared by inserting random masks into the data, which helps in calculating the perplexity during evaluation.
 
-- **Model Training and Evaluation:** Data loaders, optimizer, and learning rate scheduler are set up. The model is trained using an accelerator for efficient computation.The model's performance is evaluated by calculating the perplexity on both concatenated and original datasets. The script saves the model at specified checkpoints during training.
+- **Model Training and Evaluation:** Data loaders, optimizer, and learning rate scheduler are set up. The model is trained using an accelerator for efficient computation. The model's performance is evaluated by calculating the perplexity on both concatenated and original datasets. Model used is distilroberta-base  (https://huggingface.co/distilbert/distilroberta-base).
 
 ## Behavioral Prediction
 
+An individual profile for each chatter during the livestream is generated through the following steps:
+
+- **Message Aggregation:** For each chatter, we aggregate together all messages sent during a stream of interest, along with the timestamp of those messages and the latest message send during the stream. In addition, we also split each chatter into whether they donated during that stream or not.
+- **Embedding Generation:** The messages are converted into an embedding by making use of the LLM model pre-trained above. To obtain the embeddings for each message, the mean output of the input tokens is taken. The timestamps and the last timestamp during that stream is appended to the mean embedding, and these timestaps are scaled by dividing by the longest timestamp in the entire dataset. Finally, these message tokens are padded to the maximum length of messages send with an array of 0s.
+
+These embeddings are then used to train a transformer model built in pytorch. This model appends a learnable CLS token for classification, performs dimensionality reduction, and then passes the data through 8 self-attention layers, before using the CLS output to classify the individual into donor or non-donor using either a linear or non-linear feedforward layer. 
 
 ## Results
 ### LLM Pre-training
-
-The sucess of masked training for our BERT model can be tested by evaluating the loss by looking at the perplexity
-
-To further test to see if pre-training finds 
 
 ### Behavioral Prediction
 
