@@ -66,7 +66,7 @@ After extracting urls and metadata, livestream chat data associated with each UR
 - **Fetching Chat Messages:** Using the extracted livestream URLs, each chat messages are retrieved along with other metadata (including the sender name, the time, their membership status, the type of message, and the quantity and currency of money sent if the message is part of a donation). This is done using the chat_downloader library (Joshua Lochner, https://github.com/xenova/chat-downloader)
 - **Storing in Database:** Chat messages, along with metadata (message type, author details, timestamps, donation details), are stored in an SQLite database (Db_file.dbs).
 
-Both url/metadata extraction and chat data extraction code can be found in Cleaned_Urlscraper_and_databasegenerator.ipynb
+Both url/metadata extraction and chat data extraction code can be found in Notebook/Behavioral Prediction/Cleaned_Embedding_Generation_06122024.ipynb
 
 
 If the database has already been created, and must instead be updated with new stream chat data, see Cleaned_DB_updater.ipynb
