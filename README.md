@@ -6,9 +6,7 @@
 - [Data Collection](#Data-Collection)
 - [LLM Pre-training](#LLM-Pre--training)
 - [Behavioral Prediction](#Behavioral-Prediction)
-- [Results](#Results)
-- [Data](#data)
-- [Contact](#contact)
+
 
 ## Introduction
 
@@ -41,12 +39,18 @@ The trained LLM is utilized to generate representations of each individual viewe
 - /docs
   - README.md
   - /images
-    - logo.png
-- /src
-  - main.py
-  - /utils
-    - helper.py
-- LICENSE
+    - ProjectoutlineLQ.png
+  - /Notebooks
+    - /Data Collection
+      - Cleaned_Urlscraper_and_databasegenerator.ipynb
+      - Cleaned_DB_updater.ipynb
+    - /LLM Pre-training
+      - Cleaned_PretrainingDistilbert.ipynb
+    - /Behavioral Prediction
+      - Cleaned_Embedding_Generation_06122024.ipynb
+      - Implemented_TransformerModel.ipynb
+  - /Models and Data
+
 
 ## Data Collection
 
@@ -90,8 +94,4 @@ An individual profile for each chatter during the livestream is generated throug
 
 These embeddings are then used to train a transformer model built in pytorch. This model appends a learnable CLS token for classification, performs dimensionality reduction, and then passes the data through 8 self-attention layers, before using the CLS output to classify the individual into donor or non-donor using either a linear or non-linear feedforward layer. 
 
-## Results
-### LLM Pre-training
-
-### Behavioral Prediction
 
